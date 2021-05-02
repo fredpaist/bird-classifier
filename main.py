@@ -4,10 +4,9 @@
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 import os
 import time
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # Disable Tensorflow logging
 
 from app.service.classifier_service import ClassifierService
-
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # Disable Tensorflow logging
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':

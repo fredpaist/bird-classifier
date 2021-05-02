@@ -1,9 +1,10 @@
+import logging
 import time
+from urllib.error import HTTPError
 
 import numpy as np
 import tensorflow.compat.v2 as tf
 
-# Getting some unknown linter errors, disable everything to get this to production asap
 import config
 from app.bird_model import BirdModel
 from app.service.bird_service import BirdService
@@ -11,6 +12,7 @@ from app.service.bird_service import BirdService
 
 class ClassifierService:
     __bird_model = BirdModel()
+    __log = logging.getLogger()
 
     def __init__(self):
         self.__bird_service = BirdService()
@@ -36,23 +38,24 @@ class ClassifierService:
         image_tensor = tf.expand_dims(image_tensor, 0)
         return bird_model.call(image_tensor).numpy()
 
-    def classify_bird(self, image_url: str, start_time):
-        image = self.__bird_service.load_image(image_url)
-        print('image loaded: %s' % (time.time() - start_time))
+    def classify_bird(self, image_url: str) -> list:
+        self.__log.info('Loading image %s' % image_url)
+        try:
+            image = self.__bird_service.load_image(image_url)
+        except HTTPError as e:
+            self.__log.error('Server couldn\'t fulfill the request. For url:' + image_url)
+            return []
 
+        self.__log.info('Find possible bird names')
         model_raw_output = self.find_possible_bird_names(image)
-        print('model call finished: %s' % (time.time() - start_time))
-
+        self.__log.info('Order birds by score')
         birds_with_results_ordered = self.add_scores_to_birds(model_raw_output)
-        print('results ordered: %s' % (time.time() - start_time))
-
+        self.__log.info('Get top three possible answers')
         return self.get_top_three(birds_with_results_ordered)
 
     def main(self, start_time):
-        print('started service: %s' % (time.time() - start_time))
         for index, image_url in enumerate(config.image_urls):
-            top_three = self.classify_bird(image_url, start_time)
-            # Print results to kubernetes log
+            top_three = self.classify_bird(image_url)
             print('Run: %s' % int(index + 1))
             print('Top match: %s' % top_three[2])
             print('Second match: %s' % top_three[1])
