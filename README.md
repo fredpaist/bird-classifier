@@ -30,3 +30,10 @@ https://cdn.britannica.com/77/189277-004-0A3BC3D4.jpg
 | `tensorflow_hub` | 0.11.0 |
 | `opencv-python` | 4.5.1.48 |
 | `numpy` | 1.19.3 |
+
+##Sample output
+```
+Run: 1 https://upload.wikimedia.org/wikipedia/commons/c/c8/Phalacrocorax_varius_-Waikawa%2C_Marlborough%2C_New_Zealand-8.jpg
+1.Match:  Phalacrocorax varius varius with score: 0.8430763483047485
+2.Match:  Phalacrocorax varius with score: 0.11654692143201828
+3.Match:  Microcarbo melanoleucos with score: 0.024331536144018173

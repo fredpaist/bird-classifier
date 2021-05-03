@@ -56,7 +56,7 @@ class ClassifierService:
     def main(self, start_time):
         for index, image_url in enumerate(config.image_urls):
             top_three = self.classify_bird(image_url)
-            print('Run: %s' % int(index + 1))
+            print('Run: %s' % int(index + 1), image_url)
             print('Top match: %s' % top_three[2])
             print('Second match: %s' % top_three[1])
             print('Third match: %s' % top_three[0])
