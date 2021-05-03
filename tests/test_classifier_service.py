@@ -9,14 +9,14 @@ with mock.patch.object(BirdService, "load_birds") as mock_birds_load:
 
 from app.service.classifier_service import ClassifierService
 
-BIRD_LOAD_ANSWER = {0: MOCK_BIRD_1, 1: MOCK_BIRD_2, 2: MOCK_BIRD_3, 3: MOCK_BIRD_4, 4: MOCK_BIRD_5}
+BIRD_LOAD_ANSWER = {0: MOCK_BIRD_1, 1: MOCK_BIRD_2, 2: MOCK_BIRD_3, 867: MOCK_BIRD_4, 781: MOCK_BIRD_5}
 
 
-@mock.patch('app.service.classifier_service.BirdService')
+@mock.patch('app.service.classifier_service.BirdService.load_birds')
 class TestClassifierService(TestCase):
 
-    def test_classify_bird(self, mock_bird_service):
-        mock_bird_service.load_birds.return_value = BIRD_LOAD_ANSWER
+    def test_classify_bird(self, mock_bird_service_load):
+        mock_bird_service_load.return_value = BIRD_LOAD_ANSWER
 
         classifier_service = ClassifierService()
         result = classifier_service.classify_bird(MOCK_BIRD_IMAGE_URL)

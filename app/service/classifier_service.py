@@ -21,7 +21,10 @@ class ClassifierService:
     def add_scores_to_birds(self, model_raw_output: np.ndarray):
         for index, value in np.ndenumerate(model_raw_output):
             bird_index = index[1]
-            self.__birds[bird_index].score = value
+            if bird_index in self.__birds:
+                self.__birds[bird_index].score = value
+            else:
+                self.__log.debug("Bird with index %s not found from labels" % bird_index)
 
         return self.order_birds_by_result_score(self.__birds)
 
