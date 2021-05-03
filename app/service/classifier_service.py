@@ -53,7 +53,7 @@ class ClassifierService:
         self.__log.info('Get top three possible answers')
         return self.get_top_three(birds_with_results_ordered)
 
-    def main(self, start_time):
+    def classify_sample_images(self, start_time):
         for index, image_url in enumerate(config.image_urls):
             top_three = self.classify_bird(image_url)
             print('Run: %s' % int(index + 1), image_url)

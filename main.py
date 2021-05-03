@@ -12,7 +12,7 @@ from app.service.classifier_service import ClassifierService
 if __name__ == '__main__':
     start_time = time.time()
     classifier = ClassifierService()
-    classifier.main(start_time)
+    classifier.classify_sample_images(start_time)
     print('Time spent: %s' % (time.time() - start_time))
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
