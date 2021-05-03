@@ -60,5 +60,5 @@ class ClassifierService:
             print('Top match: %s' % top_three[2])
             print('Second match: %s' % top_three[1])
             print('Third match: %s' % top_three[0])
-            print('first run finish: %s' % (time.time() - start_time))
+            print('Run finish: %s' % (time.time() - start_time))
             print('\n')
