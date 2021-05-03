@@ -2,5 +2,3 @@ tensorflow==2.5.0rc0
 tensorflow_hub==0.11.0
 opencv-python==4.5.1.48
 numpy==1.19.3
-
-b'id,name\n964,background\n0,Haemorhous cassinii\n1,Aramus guarauna\n2,Rupornis magnirostris\n3,Cyanocitta cristata\n

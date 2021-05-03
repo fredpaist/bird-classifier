@@ -1,8 +1,9 @@
 import os
+import urllib.request
 
 from app.model.bird import Bird
 
-MOCK_BIRD_LOAD_URL = "file:\\" + os.path.abspath("mocking/mock_data.csv")
+MOCK_BIRD_LOAD_URL = "file:" + urllib.request.pathname2url(os.path.abspath("tests/mocking/mock_data.csv"))
 
 MOCK_BIRD_1 = Bird(0, "Haemorhous cassinii")
 MOCK_BIRD_2 = Bird(1, "Aramus guarauna")
